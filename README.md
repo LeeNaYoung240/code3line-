@@ -253,7 +253,7 @@
 <div markdown="1">
   
 
-![image](https://github.com/samgyeobsal-sparta/code3line/assets/107848521/676254ca-452d-44cc-b469-08e5c60d6b48)
+![image](https://github.com/LeeNaYoung240/code3line/assets/107848521/24ea106b-2f65-4a0d-a939-67e9a21caa58)
 
 
 
