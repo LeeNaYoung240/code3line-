@@ -55,8 +55,7 @@ public class BoardService {
     // 게시글 추가 메서드.
     public BoardResponseDto addBoard(
             User user,
-            BoardRequestDto requestDto,
-            List<MultipartFile> fileList) {
+            BoardRequestDto requestDto) {
 
         log.info("addBoard 메서드 실행");
 
@@ -67,9 +66,7 @@ public class BoardService {
                 .type(Board.BoardType.NORMAL)
                 .build();
 
-        if (fileList != null) {
-            addFileonBoard(board, fileList);
-        }
+
 
         Board addBoard = boardRepository.save(board);
 

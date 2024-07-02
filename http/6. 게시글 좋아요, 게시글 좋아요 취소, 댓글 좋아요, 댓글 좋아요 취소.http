@@ -23,7 +23,7 @@ Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
 ### 댓글 좋아요
-POST http://localhost:8080/comments/2/likes
+POST http://localhost:8080/comments/1/likes
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 

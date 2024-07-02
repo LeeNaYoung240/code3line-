@@ -6,7 +6,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import sparta.code3line.common.Timestamp;
 import sparta.code3line.domain.board.entity.Board;
+import sparta.code3line.domain.like.entity.LikeBoard;
+import sparta.code3line.domain.like.entity.LikeComment;
 import sparta.code3line.domain.user.entity.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -34,6 +39,13 @@ public class Comment extends Timestamp {
         this.contents = contents;
         this.user = user;
         this.board = board;
+    }
+
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LikeComment> likeComments = new ArrayList<>();
+
+    public int getLikeCnt() {
+        return this.likeComments.size();
     }
 
     public void updateContent(String contents) {

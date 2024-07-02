@@ -10,11 +10,13 @@ public class CommentResponseDto {
     private Long userId;
     private Long boardId;
     private String contents;
+    private int likeCnt;
 
     public CommentResponseDto(Comment comment) {
         this.userId = comment.getUser().getId();
         this.boardId = comment.getBoard().getId();
         this.contents = comment.getContents();
+        this.likeCnt = comment.getLikeCnt();
     }
 
 }

@@ -35,6 +35,12 @@ GET http://localhost:8080/2/comments
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
+
+### 4-2-1. 댓글 단건 조회
+GET http://localhost:8080/2/comments/1
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
 ### 4-3. 댓글 수정
 PUT http://localhost:8080/2/comment/1
 Content-Type: application/json

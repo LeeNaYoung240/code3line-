@@ -1,5 +1,6 @@
 package sparta.code3line.domain.board.dto;
 
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 import sparta.code3line.domain.board.entity.Board;
 
@@ -14,6 +15,7 @@ public class BoardResponseDto {
     private String contents;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
+    private int likeCnt;
 
     public BoardResponseDto(Board board) {
 
@@ -23,6 +25,7 @@ public class BoardResponseDto {
         this.contents = board.getContents();
         this.createdAt = board.getCreatedAt();
         this.modifiedAt = board.getModifiedAt();
+        this.likeCnt = board.getLikeCnt();
 
     }
 

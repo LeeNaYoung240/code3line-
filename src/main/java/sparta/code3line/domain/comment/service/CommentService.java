@@ -56,6 +56,15 @@ public class CommentService {
 
     }
 
+    public CommentResponseDto getComment(Long boardId, Long commentId) {
+
+        Comment comment = commentRepository.findByIdAndBoardId(commentId, boardId).orElseThrow(
+                () -> new CustomException(ErrorCode.COMMENT_NOT_FOUND)
+        );
+
+        return new CommentResponseDto(comment);
+    }
+
     @Transactional
     public CommentResponseDto updateComment(Long boardId, Long commentId, User user, CommentRequestDto requestDto) {
 

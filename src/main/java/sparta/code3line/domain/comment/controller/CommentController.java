@@ -48,6 +48,19 @@ public class CommentController {
 
     }
 
+    @GetMapping("/comments/{commentId}")
+    public ResponseEntity<CommonResponse<CommentResponseDto>> readComment(@PathVariable Long boardId,
+                                                                          @PathVariable Long commentId) {
+
+        CommonResponse<CommentResponseDto> response = new CommonResponse<>(
+                "댓글 조회 완료 🎉",
+                HttpStatus.OK.value(),
+                commentService.getComment(boardId, commentId)
+        );
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
     @PutMapping("/comment/{commentId}")
     public ResponseEntity<CommonResponse<CommentResponseDto>> updateComment(@PathVariable Long boardId,
                                                                             @PathVariable Long commentId,
