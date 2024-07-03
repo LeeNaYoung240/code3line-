@@ -62,3 +62,8 @@ GET http://localhost:8080/boards/2
 DELETE http://localhost:8080/boards/1
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
+
+### 좋아요한 게시글 전체 조회
+GET http://localhost:8080/likes/boards?page=1
+Content-Type: application/json
+Authorization: Bearer {{access_token}}

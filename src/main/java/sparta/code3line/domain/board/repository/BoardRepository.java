@@ -9,7 +9,7 @@ import sparta.code3line.domain.board.entity.Board;
 import java.util.List;
 import java.util.Optional;
 
-public interface BoardRepository extends JpaRepository<Board, Long> {
+public interface BoardRepository extends JpaRepository<Board, Long>, BoardRepositoryCustom {
 
     Optional<Board> findById(Long id);
 

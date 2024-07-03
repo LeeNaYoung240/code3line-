@@ -1,6 +1,7 @@
 package sparta.code3line.domain.board.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
+import lombok.Builder;
 import lombok.Data;
 import sparta.code3line.domain.board.entity.Board;
 
@@ -27,6 +28,19 @@ public class BoardResponseDto {
         this.modifiedAt = board.getModifiedAt();
         this.likeCnt = board.getLikeCnt();
 
+    }
+
+    @Builder
+    public BoardResponseDto(String nickname, Long boardId, String title, String contents, LocalDateTime createdAt, LocalDateTime modifiedAt,
+                            int likeCnt)
+    {
+        this.nickname = nickname;
+        this.boardId = boardId;
+        this.title = title;
+        this.contents = contents;
+        this.createdAt = createdAt;
+        this.modifiedAt = modifiedAt;
+        this.likeCnt = likeCnt;
     }
 
 }

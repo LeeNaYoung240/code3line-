@@ -13,12 +13,12 @@ Content-Type: application/json
 %}
 
 ### 게시글 좋아요
-POST http://localhost:8080/boards/2/likes
+POST http://localhost:8080/boards/5/likes
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
 ### 게시글 좋아요 취소
-DELETE http://localhost:8080/boards/2/likes
+DELETE http://localhost:8080/boards/5/likes
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
@@ -31,3 +31,5 @@ Authorization: Bearer {{access_token}}
 DELETE http://localhost:8080/comments/2/likes
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
+
+

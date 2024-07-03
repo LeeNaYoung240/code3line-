@@ -1,18 +1,19 @@
 package sparta.code3line.domain.like.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.function.EntityResponse;
 import sparta.code3line.common.CommonResponse;
+import sparta.code3line.domain.board.dto.BoardResponseDto;
 import sparta.code3line.domain.like.dto.LikeResponseDto;
 import sparta.code3line.domain.like.service.LikeService;
 import sparta.code3line.security.UserPrincipal;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -72,6 +73,20 @@ public class LikeController {
                 HttpStatus.OK.value(),
                 responseDto));
 
+    }
+
+    @GetMapping("/likes/boards")
+    public ResponseEntity<CommonResponse<List<BoardResponseDto>>> getLikeBoards(
+            @RequestParam(defaultValue = "1") int page,
+            @AuthenticationPrincipal UserPrincipal principal) {
+
+        CommonResponse<List<BoardResponseDto>> response = new CommonResponse<>(
+                "좋아요 한 게시글 " + page + "번 페이지 조회 완료 🎉",
+                HttpStatus.OK.value(),
+                likeService.getBoards(page, principal.getUser(), 5)
+        );
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
 }

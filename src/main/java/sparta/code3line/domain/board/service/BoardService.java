@@ -67,7 +67,6 @@ public class BoardService {
                 .build();
 
 
-
         Board addBoard = boardRepository.save(board);
 
         return new BoardResponseDto(addBoard);
