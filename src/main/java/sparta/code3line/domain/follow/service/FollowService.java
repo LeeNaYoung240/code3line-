@@ -90,4 +90,20 @@ public class FollowService {
                 .map(BoardResponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    // 팔로우하는 게시글 조회 - 작성자명 기준 오름차순 정렬
+    public List<BoardResponseDto> getFollowBoardWithPageAndSortByName(int page, User user, int size) {
+        long offset = (page - 1) * size;
+
+        List<User> followingUsers = followRepository.findAllByFollowerId(user.getId())
+                .stream()
+                .map(Follow::getFollowing)
+                .collect(Collectors.toList());
+
+        List<Board> boards = boardRepository.getFollowBoardWithPageAndSortByName(followingUsers, offset, size);
+
+        return boards.stream()
+                .map(BoardResponseDto::new)
+                .collect(Collectors.toList());
+    }
 }

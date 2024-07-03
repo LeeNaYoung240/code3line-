@@ -8,8 +8,10 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import sparta.code3line.common.CommonResponse;
 import sparta.code3line.domain.board.dto.BoardResponseDto;
+import sparta.code3line.domain.board.repository.BoardRepository;
 import sparta.code3line.domain.follow.dto.FollowRequestDto;
 import sparta.code3line.domain.follow.dto.FollowResponseDto;
+import sparta.code3line.domain.follow.repository.FollowRepository;
 import sparta.code3line.domain.follow.service.FollowService;
 import sparta.code3line.domain.user.entity.User;
 import sparta.code3line.security.UserPrincipal;
@@ -24,6 +26,8 @@ import java.util.List;
 public class FollowController {
 
     private final FollowService followService;
+    private final FollowRepository followRepository;
+    private final BoardRepository boardRepository;
 
     @PostMapping
     public ResponseEntity<CommonResponse<FollowResponseDto>> createFollow(
@@ -69,6 +73,21 @@ public class FollowController {
                 "팔로우한 게시글 " + page + "번 페이지 조회 완료 🎉",
                 HttpStatus.OK.value(),
                 followService.getFollowersBoards(page, principal.getUser(), 5)
+        );
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    // 팔로우하는 user의 게시글 조회 - 작성자명 기준 정렬
+    @GetMapping("/boards/names")
+    public ResponseEntity<CommonResponse<List<BoardResponseDto>>> getFollowBoardWithPageAndSortByName(
+            @RequestParam(defaultValue = "1") int page,
+            @AuthenticationPrincipal UserPrincipal principal) {
+
+        CommonResponse<List<BoardResponseDto>> response = new CommonResponse<>(
+                "팔로우한 게시글 작성자명 기준 " + page + "번 페이지 조회 완료 🎉",
+                HttpStatus.OK.value(),
+                followService.getFollowBoardWithPageAndSortByName(page, principal.getUser(), 5)
         );
 
         return ResponseEntity.status(HttpStatus.OK).body(response);

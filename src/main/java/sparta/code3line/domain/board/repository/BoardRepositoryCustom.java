@@ -13,5 +13,6 @@ public interface BoardRepositoryCustom {
 
     List<Board> getFollowBoardWithPageAndSortDesc(List<User> followingUsers, long offset, int pageSize);
 
+    List<Board> getFollowBoardWithPageAndSortByName(List<User> followingUsers, long offset, int pageSize);
 
 }

@@ -46,7 +46,7 @@ Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
 {
-  "following_user_id": 7
+  "following_user_id": 2
 }
 
 ### 5-2. 팔로우 조회
@@ -65,5 +65,10 @@ Authorization: Bearer {{access_token}}
 
 ### 팔로우한 게시글 전체 조회
 GET http://localhost:8080/follows/boards?page=1
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+### 팔로우 조회 - 작성자명 기준으로 오름차순
+GET http://localhost:8080/follows/boards/names?page=1
 Content-Type: application/json
 Authorization: Bearer {{access_token}}

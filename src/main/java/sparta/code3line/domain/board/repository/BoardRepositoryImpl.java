@@ -47,4 +47,17 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom {
                 .fetch();
     }
 
+    @Override
+    public List<Board> getFollowBoardWithPageAndSortByName(List<User> followingUsers, long offset, int pageSize) {
+        OrderSpecifier<?> orderSpecifier = new OrderSpecifier<>(Order.ASC, board.user.username);
+
+        return jpaQueryFactory.selectFrom(board)
+                .leftJoin(follow).on(board.user.eq(follow.following))
+                .where(follow.following.in(followingUsers))
+                .offset(offset)
+                .limit(pageSize)
+                .orderBy(orderSpecifier)
+                .fetch();
+    }
+
 }
