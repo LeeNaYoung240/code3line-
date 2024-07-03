@@ -5,7 +5,7 @@ import sparta.code3line.domain.like.entity.LikeComment;
 
 import java.util.Optional;
 
-public interface LikeCommentRepository extends JpaRepository<LikeComment, Long> {
+public interface LikeCommentRepository extends JpaRepository<LikeComment, Long>, LikeCommentRepositoryCustom {
 
     Optional<LikeComment> findByUserIdAndCommentId(Long userId, Long commentId);
 

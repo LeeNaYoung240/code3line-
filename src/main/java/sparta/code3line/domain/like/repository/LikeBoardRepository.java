@@ -5,7 +5,7 @@ import sparta.code3line.domain.like.entity.LikeBoard;
 
 import java.util.Optional;
 
-public interface LikeBoardRepository extends CrudRepository<LikeBoard, Long> {
+public interface LikeBoardRepository extends CrudRepository<LikeBoard, Long>, LikeBoardRepositoryCustom {
 
     Optional<LikeBoard> findByUserIdAndBoardId(Long userId, Long commentId);
 

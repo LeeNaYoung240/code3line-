@@ -13,7 +13,7 @@ Content-Type: application/json
 %}
 
 ### 게시글 좋아요
-POST http://localhost:8080/boards/5/likes
+POST http://localhost:8080/boards/6/likes
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
@@ -23,7 +23,7 @@ Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
 ### 댓글 좋아요
-POST http://localhost:8080/comments/7/likes
+POST http://localhost:8080/comments/10/likes
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 

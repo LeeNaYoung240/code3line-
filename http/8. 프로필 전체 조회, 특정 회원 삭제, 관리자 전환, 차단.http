@@ -46,6 +46,11 @@ GET http://localhost:8080/profiles
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
+### 8-1-1. 개인 프로필 조회
+GET http://localhost:8080/users/2/profile
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
 ### 8-2. ADMIN : 특정 회원 관리자로 변경, USER : 불가능
 PATCH http://localhost:8080/admin/users/2/verification
 Content-Type: application/json

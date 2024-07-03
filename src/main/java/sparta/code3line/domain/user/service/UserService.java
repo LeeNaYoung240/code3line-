@@ -7,6 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 import sparta.code3line.common.exception.CustomException;
 import sparta.code3line.common.exception.ErrorCode;
 import sparta.code3line.domain.file.FileService;
+import sparta.code3line.domain.like.repository.LikeBoardRepository;
+import sparta.code3line.domain.like.repository.LikeCommentRepository;
 import sparta.code3line.domain.user.dto.ProfileRequestDto;
 import sparta.code3line.domain.user.dto.UserResponseDto;
 import sparta.code3line.domain.user.entity.User;
@@ -24,6 +26,8 @@ public class UserService {
     private final Logger logger = Logger.getLogger(UserService.class.getName());
 
     private final FileService fileService;
+    private final LikeBoardRepository likeBoardRepository;
+    private final LikeCommentRepository likeCommentRepository;
 
 
     @Transactional
@@ -109,33 +113,34 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public UserResponseDto getUserProfile(Long userId) {
-
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.USERNAME_NOT_FOUND));
 
-        return new UserResponseDto(user);
+        int boardLikeCnt = likeBoardRepository.countByUserId(userId);
+        int commentLikeCnt = likeCommentRepository.countByUserId(userId);
 
+        return new UserResponseDto(user, boardLikeCnt, commentLikeCnt);
     }
 
     // 사용자 프로필 가져오기
     @Transactional(readOnly = true)
     public List<UserResponseDto> getUserProfiles(User currentUser) {
-
         List<UserResponseDto> userResponseDto = new ArrayList<>();
-
         if (currentUser.getRole() == User.Role.ADMIN) {
             List<User> users = userRepository.findAll();
             for (User user : users) {
-                userResponseDto.add(new UserResponseDto(user));
+                int boardLikeCnt = likeBoardRepository.countByUserId(user.getId());
+                int commentLikeCnt = likeCommentRepository.countByUserId(user.getId());
+                userResponseDto.add(new UserResponseDto(user, boardLikeCnt, commentLikeCnt));
             }
-        } else if(currentUser.getRole() == User.Role.NORMAL){
+        } else if (currentUser.getRole() == User.Role.NORMAL) {
             User user = userRepository.findById(currentUser.getId())
                     .orElseThrow(() -> new CustomException(ErrorCode.USERNAME_NOT_FOUND));
-            userResponseDto.add(new UserResponseDto(user));
+            int boardLikeCnt = likeBoardRepository.countByUserId(user.getId());
+            int commentLikeCnt = likeCommentRepository.countByUserId(user.getId());
+            userResponseDto.add(new UserResponseDto(user, boardLikeCnt, commentLikeCnt));
         }
-
         return userResponseDto;
-
     }
 
     private User getUserById(Long userId) {

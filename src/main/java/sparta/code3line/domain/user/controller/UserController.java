@@ -94,6 +94,21 @@ public class UserController {
 
     }
 
+    @GetMapping("/users/{userId}/profile")
+    public ResponseEntity<CommonResponse<UserResponseDto>> getUserProfile(
+            @PathVariable Long userId,
+            @AuthenticationPrincipal UserPrincipal userPrincipal) {
+
+        UserResponseDto userResponseDto = userService.getUserProfile(userId);
+        CommonResponse<UserResponseDto> response = new CommonResponse<>(
+                "프로필 조회 성공 🎉",
+                HttpStatus.OK.value(),
+                userResponseDto);
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+
     // 유저 프로필 수정
     @PatchMapping("/profiles/{userId}")
     public ResponseEntity<CommonResponse<UserResponseDto>> updateProfilesNickname(
