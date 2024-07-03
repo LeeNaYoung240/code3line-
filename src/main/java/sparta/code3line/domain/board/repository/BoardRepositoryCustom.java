@@ -10,4 +10,8 @@ import java.util.List;
 public interface BoardRepositoryCustom {
 
     List<Board> getLikeBoardWithPageAndSortDesc(User user, long offset, int pageSize);
+
+    List<Board> getFollowBoardWithPageAndSortDesc(List<User> followingUsers, long offset, int pageSize);
+
+
 }

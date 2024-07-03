@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import sparta.code3line.domain.like.entity.QLikeBoard;
 
 @RequiredArgsConstructor
-public class LikeBoardCustomRepositoryImpl implements LikeBoardRepositoryCustom {
+public class LikeBoardRepositoryImpl implements LikeBoardRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
 
