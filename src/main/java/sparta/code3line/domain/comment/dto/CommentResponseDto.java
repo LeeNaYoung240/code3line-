@@ -19,4 +19,11 @@ public class CommentResponseDto {
         this.likeCnt = comment.getLikeCnt();
     }
 
+    @Builder
+    public CommentResponseDto(Long userId, Long boardId, String contents, int likeCnt) {
+        this.userId = userId;
+        this.boardId = boardId;
+        this.contents = contents;
+        this.likeCnt = likeCnt;
+    }
 }

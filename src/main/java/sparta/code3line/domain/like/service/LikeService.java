@@ -11,6 +11,7 @@ import sparta.code3line.common.exception.ErrorCode;
 import sparta.code3line.domain.board.dto.BoardResponseDto;
 import sparta.code3line.domain.board.entity.Board;
 import sparta.code3line.domain.board.repository.BoardRepository;
+import sparta.code3line.domain.comment.dto.CommentResponseDto;
 import sparta.code3line.domain.comment.entity.Comment;
 import sparta.code3line.domain.comment.repository.CommentRepository;
 import sparta.code3line.domain.like.dto.LikeResponseDto;
@@ -122,4 +123,14 @@ public class LikeService {
                 .collect(Collectors.toList());
     }
 
+    // 좋아요하는 댓글 조회
+    @Transactional
+    public List<CommentResponseDto> getComments(int page, User user, int size) {
+        long offset = (page - 1) * size;
+        List<Comment> comments = commentRepository.getLikeCommentWithPageAndSortDesc(user, offset, size);
+
+        return comments.stream()
+                .map(CommentResponseDto::new)
+                .collect(Collectors.toList());
+    }
 }

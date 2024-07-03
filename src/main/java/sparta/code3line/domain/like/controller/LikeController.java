@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.function.EntityResponse;
 import sparta.code3line.common.CommonResponse;
 import sparta.code3line.domain.board.dto.BoardResponseDto;
+import sparta.code3line.domain.comment.dto.CommentResponseDto;
 import sparta.code3line.domain.like.dto.LikeResponseDto;
 import sparta.code3line.domain.like.service.LikeService;
 import sparta.code3line.security.UserPrincipal;
@@ -89,4 +90,17 @@ public class LikeController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @GetMapping("/likes/comments")
+    public ResponseEntity<CommonResponse<List<CommentResponseDto>>> getLikeComments(
+            @RequestParam(defaultValue = "1") int page,
+            @AuthenticationPrincipal UserPrincipal principal) {
+
+        CommonResponse<List<CommentResponseDto>> response = new CommonResponse<>(
+                "좋아요 한 댓글 " + page + "번 페이지 조회 완료 🎉",
+                HttpStatus.OK.value(),
+                likeService.getComments(page, principal.getUser(), 5)
+        );
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }
