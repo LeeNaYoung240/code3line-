@@ -13,6 +13,7 @@ import java.util.List;
 
 @Getter
 @Entity
+@Table(name = "users")
 @RequiredArgsConstructor
 public class User extends Timestamp {
 
