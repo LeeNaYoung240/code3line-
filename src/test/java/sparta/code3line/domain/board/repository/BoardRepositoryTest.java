@@ -75,10 +75,10 @@ class BoardRepositoryTest {
     void testGetLikeBoardWithPageAndSortDesc() {
         List<Board> boards = boardRepository.getLikeBoardWithPageAndSortDesc(user, 0, 5);
         assertThat(boards).hasSize(5);
-        assertThat(boards.get(0).getTitle()).isEqualTo("테스트4");
-        assertThat(boards.get(1).getTitle()).isEqualTo("테스트3");
-        assertThat(boards.get(2).getTitle()).isEqualTo("테스트2");
-        assertThat(boards.get(3).getTitle()).isEqualTo("테스트1");
-        assertThat(boards.get(4).getTitle()).isEqualTo("테스트0");
+        assertThat(boards.get(0).getTitle()).isEqualTo("Title 4");
+        assertThat(boards.get(1).getTitle()).isEqualTo("Title 3");
+        assertThat(boards.get(2).getTitle()).isEqualTo("Title 2");
+        assertThat(boards.get(3).getTitle()).isEqualTo("Title 1");
+        assertThat(boards.get(4).getTitle()).isEqualTo("Title 0");
     }
 }
